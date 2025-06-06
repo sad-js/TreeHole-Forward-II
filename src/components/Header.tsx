@@ -1,12 +1,19 @@
 // Header.tsx
 
 import React from "react";
+import type { SortMode } from "./PostFeed";
 
 interface HeaderProps {
   onAddPost: () => void;
+  sortMode: SortMode;
+  onChangeSortMode: (mode: SortMode) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onAddPost }) => {
+const Header: React.FC<HeaderProps> = ({
+  onAddPost,
+  sortMode,
+  onChangeSortMode,
+}) => {
   return (
     <header className="header">
       <div className="logo-title">
@@ -23,8 +30,18 @@ const Header: React.FC<HeaderProps> = ({ onAddPost }) => {
         ͓̽U͓͓̽̽C͓͓̽̽I͓̽ ͓̽T͓͓̽̽r͓͓̽̽e͓͓̽̽e͓͓̽̽H͓͓̽̽o͓͓̽̽l͓͓̽̽e͓̽
          */}
         <div className="nav-buttons">
-          <button className="tab active">🌿 New</button>
-          <button className="tab">🔥 HOT</button>
+          <button
+            className={`tab ${sortMode === "new" ? "active" : ""}`}
+            onClick={() => onChangeSortMode("new")}
+          >
+            🌿 New
+          </button>
+          <button
+            className={`tab ${sortMode === "hot" ? "active" : ""}`}
+            onClick={() => onChangeSortMode("hot")}
+          >
+            🔥 HOT
+          </button>
         </div>
       </div>
       <input type="text" className="search" placeholder="Search a post..." />

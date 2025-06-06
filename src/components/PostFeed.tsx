@@ -1,54 +1,24 @@
-// PostFeed.tsx
+// src/components/PostFeed.tsx
 
 import React from "react";
 import PostCard from "./PostCard";
+import { dummyPosts } from "../data/posts";
 
-const dummyPosts = [
-  {
-    username: "SleepyAnteater",
-    time: "2025-04-28 20:21",
-    category: "#Rant",
-    content:
-      "I just pulled 3 all-nighters in a row... midterm fried me. Send help.",
-    feeling: "😴 exhausted",
-    comments: 28,
-    reactions: {
-      "❤️": 328,
-      "😊": 92,
-    } as { [emoji: string]: number },
-  },
-  {
-    username: "CoffeeLover123",
-    time: "2025-04-28 08:42",
-    category: "#Confession",
-    content:
-      "Sometimes I sit in Langson just to cry a little and nobody notices. That’s kinda nice.",
-    feeling: "🥺 overwhelmed",
-    comments: 11,
-    reactions: {
-      "💙": 94,
-      "😢": 41,
-    } as { [emoji: string]: number },
-  },
-  {
-    username: "Ano",
-    time: "2025-04-27 15:30",
-    category: "#Advice",
-    content:
-      "If you're struggling with imposter syndrome, remember that everyone feels like a fraud sometimes. You’re not alone.",
-    feeling: "💪 determined",
-    comments: 5,
-    reactions: {
-      "👍": 150,
-      "💡": 75,
-    } as { [emoji: string]: number },
-  },
-];
+export type SortMode = "new" | "hot";
 
-const PostFeed: React.FC = () => {
+interface PostFeedProps {
+  sortMode: SortMode;
+}
+
+const PostFeed: React.FC<PostFeedProps> = ({ sortMode }) => {
+  const sorted = [...dummyPosts].sort((a, b) => {
+    if (sortMode === "hot") return b.comments.length - a.comments.length;
+    return new Date(b.time).getTime() - new Date(a.time).getTime();
+  });
+
   return (
     <section className="post-feed">
-      {dummyPosts.map((post, idx) => (
+      {sorted.map((post, idx) => (
         <PostCard
           key={idx}
           username={post.username}
@@ -56,7 +26,7 @@ const PostFeed: React.FC = () => {
           category={post.category}
           content={post.content}
           feeling={post.feeling}
-          comments={post.comments}
+          comments={post.comments.length}
           reactions={post.reactions}
         />
       ))}
