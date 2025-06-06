@@ -2,7 +2,7 @@
 
 import React from "react";
 
-interface PostCardProps {
+export interface PostCardProps {
   username: string;
   time: string;
   category: string;
