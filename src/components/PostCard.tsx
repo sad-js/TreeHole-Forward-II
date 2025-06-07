@@ -23,7 +23,7 @@ const PostCard: React.FC<PostCardProps> = ({
   comments,
   reactions,
   onClick,
-  onClickComments,
+  // onClickComments,
 }) => {
   const [emojiCounts, setEmojiCounts] = useState(reactions);
   const [clicked, setClicked] = useState<{ [emoji: string]: boolean }>({});
