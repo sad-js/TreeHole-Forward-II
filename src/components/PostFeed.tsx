@@ -9,10 +9,18 @@ export type SortMode = "new" | "hot";
 interface PostFeedProps {
   sortMode: SortMode;
   onOpenReply: (post: Post) => void;
+  searchQuery: string;
 }
 
-const PostFeed: React.FC<PostFeedProps> = ({ sortMode, onOpenReply }) => {
-  const sorted = [...dummyPosts].sort((a, b) => {
+const PostFeed: React.FC<PostFeedProps> = ({
+  sortMode,
+  onOpenReply,
+  searchQuery,
+}) => {
+  const filtered = dummyPosts.filter((post) =>
+    post.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const sorted = [...filtered].sort((a, b) => {
     if (sortMode === "hot") {
       const aCount = Object.values(a.reactions).reduce((sum, v) => sum + v, 0);
       const bCount = Object.values(b.reactions).reduce((sum, v) => sum + v, 0);

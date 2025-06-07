@@ -12,6 +12,7 @@ import ReplyPanel from "./components/ReplyPanel";
 import type { Post } from "./data/posts";
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState("");
   const [showCreatePanel, setShowCreatePanel] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("new");
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
@@ -22,12 +23,15 @@ function App() {
         onAddPost={() => setShowCreatePanel(true)}
         sortMode={sortMode}
         onChangeSortMode={setSortMode}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
       />
       <Sidebar />
       <main>
         <PostFeed
           sortMode={sortMode}
           onOpenReply={(post) => setSelectedPost(post)}
+          searchQuery={searchQuery}
         />
       </main>
       <CreatePostPanel
