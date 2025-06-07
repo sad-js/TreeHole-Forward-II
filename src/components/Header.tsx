@@ -7,12 +7,16 @@ interface HeaderProps {
   onAddPost: () => void;
   sortMode: SortMode;
   onChangeSortMode: (mode: SortMode) => void;
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   onAddPost,
   sortMode,
   onChangeSortMode,
+  searchQuery,
+  onSearchChange,
 }) => {
   return (
     <header className="header">
@@ -44,7 +48,13 @@ const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
       </div>
-      <input type="text" className="search" placeholder="Search a post..." />
+      <input
+        className="search"
+        type="text"
+        placeholder="Search posts..."
+        value={searchQuery}
+        onChange={(e) => onSearchChange(e.target.value)}
+      />
       <button className="add-post" onClick={onAddPost}>
         <img src="/new.svg" alt="Create Post" className="add-post-icon" />
       </button>
