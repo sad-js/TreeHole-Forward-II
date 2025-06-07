@@ -10,6 +10,7 @@ interface PostCardProps {
   feeling: string;
   comments: number;
   reactions: { [emoji: string]: number };
+  onClickComments: () => void;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -20,6 +21,7 @@ const PostCard: React.FC<PostCardProps> = ({
   feeling,
   comments,
   reactions,
+  onClickComments,
 }) => {
   return (
     <div className="post-card">
@@ -43,7 +45,9 @@ const PostCard: React.FC<PostCardProps> = ({
             </span>
           ))}
         </div>
-        <span className="comment-count">{comments} comments →</span>
+        <span className="comment-count" onClick={onClickComments}>
+          {comments} comments →
+        </span>
       </div>
     </div>
   );

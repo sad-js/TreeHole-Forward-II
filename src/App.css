@@ -6,20 +6,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* === 基础布局与字体 === */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  background-color: #002244;
+  background-color: #13386c;
   color: #ffffff;
   font-family: "Nunito Sans", sans-serif;
 }
 
 main {
-  width: calc(100% - 96px);
   margin-top: 80px;
-  margin-left: 260px;
+  margin-left: 20vw;
+  width: calc(100vw - 20vw);
   padding: 20px;
   min-height: calc(100vh - 80px);
-  background-color: #1b3d6d;
+  background-color: transparent;
+  box-sizing: border-box;
 }
 
 /* === Header 顶部固定 === */
@@ -115,7 +123,7 @@ main {
   top: 80px;
   bottom: 0;
   left: 0;
-  width: 211px;
+  width: 16vw;
   background-color: #1b3d6d;
   padding: 24px;
   display: flex;
@@ -168,9 +176,18 @@ main {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
 }
 
 .post-card {
+  width: 92%;
+  /* align-items: center; */
+  max-width: 100%;
+  margin-left: none;
   border-radius: 12px;
   padding: 24px;
   background-color: #1f2e3c;
@@ -431,4 +448,12 @@ textarea::placeholder {
 .overlay.active {
   opacity: 1;
   pointer-events: all;
+}
+
+.reply-box {
+  background-color: #324a64;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  color: white;
 }

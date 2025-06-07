@@ -7,10 +7,14 @@ import Sidebar from "./components/Sidebar";
 import PostFeed from "./components/PostFeed";
 import CreatePostPanel from "./components/CreatePostPanel";
 import type { SortMode } from "./components/PostFeed";
+import ReplyPanel from "./components/ReplyPanel";
+import { dummyPosts } from "./data/posts";
+import type { Post } from "./data/posts";
 
 function App() {
   const [showCreatePanel, setShowCreatePanel] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("new");
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   return (
     <div className={showCreatePanel ? "blurred" : ""}>
@@ -20,13 +24,20 @@ function App() {
         onChangeSortMode={setSortMode}
       />
       <Sidebar />
-      233
       <main>
-        <PostFeed sortMode={sortMode} />
+        <PostFeed
+          sortMode={sortMode}
+          onOpenReply={(post) => setSelectedPost(post)}
+        />
       </main>
       <CreatePostPanel
         show={showCreatePanel}
         onClose={() => setShowCreatePanel(false)}
+      />
+      <ReplyPanel
+        show={!!selectedPost}
+        post={selectedPost}
+        onClose={() => setSelectedPost(null)}
       />
     </div>
   );
