@@ -10,21 +10,36 @@ interface PostFeedProps {
   sortMode: SortMode;
   onOpenReply: (post: Post) => void;
   searchQuery: string;
+  selectedCategories: string[];
+  selectedFeelings: string[];
 }
 
 const PostFeed: React.FC<PostFeedProps> = ({
   sortMode,
   onOpenReply,
   searchQuery,
+  selectedCategories,
+  selectedFeelings,
 }) => {
-  const filtered = dummyPosts.filter((post) =>
-    post.content.toLowerCase().includes(searchQuery.toLowerCase())
+  const matchesCategory = (post: Post) =>
+    selectedCategories.includes("All") ||
+    selectedCategories.includes(post.category);
+
+  const matchesFeeling = (post: Post) =>
+    selectedFeelings.includes("All") || selectedFeelings.includes(post.feeling);
+
+  const filtered = dummyPosts.filter(
+    (post) =>
+      post.content.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      matchesCategory(post) &&
+      matchesFeeling(post)
   );
+
   const sorted = [...filtered].sort((a, b) => {
     if (sortMode === "hot") {
-      const aCount = Object.values(a.reactions).reduce((sum, v) => sum + v, 0);
-      const bCount = Object.values(b.reactions).reduce((sum, v) => sum + v, 0);
-      return bCount - aCount;
+      const aReacts = Object.values(a.reactions).reduce((sum, n) => sum + n, 0);
+      const bReacts = Object.values(b.reactions).reduce((sum, n) => sum + n, 0);
+      return bReacts - aReacts;
     }
     return new Date(b.time).getTime() - new Date(a.time).getTime();
   });

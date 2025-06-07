@@ -8,7 +8,7 @@ import PostFeed from "./components/PostFeed";
 import CreatePostPanel from "./components/CreatePostPanel";
 import type { SortMode } from "./components/PostFeed";
 import ReplyPanel from "./components/ReplyPanel";
-// import { dummyPosts } from "./data/posts";
+import { dummyPosts } from "./data/posts";
 import type { Post } from "./data/posts";
 
 function App() {
@@ -16,6 +16,10 @@ function App() {
   const [showCreatePanel, setShowCreatePanel] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("new");
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([
+    "All",
+  ]);
+  const [selectedFeelings, setSelectedFeelings] = useState<string[]>(["All"]);
 
   return (
     <div className={showCreatePanel ? "blurred" : ""}>
@@ -26,12 +30,20 @@ function App() {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
-      <Sidebar />
+      <Sidebar
+        posts={dummyPosts}
+        selectedCategories={selectedCategories}
+        selectedFeelings={selectedFeelings}
+        onCategoryChange={setSelectedCategories}
+        onFeelingChange={setSelectedFeelings}
+      />
       <main>
         <PostFeed
           sortMode={sortMode}
           onOpenReply={(post) => setSelectedPost(post)}
           searchQuery={searchQuery}
+          selectedCategories={selectedCategories}
+          selectedFeelings={selectedFeelings}
         />
       </main>
       <CreatePostPanel

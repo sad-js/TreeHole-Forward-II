@@ -4,6 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 /* === 基础布局与字体 === */
 html,
@@ -84,6 +85,11 @@ main {
   color: #1a2b3c;
 }
 
+.tab:hover {
+  transform: scale(1.1);
+  filter: brightness(1.05);
+}
+
 .search {
   width: 460px;
   padding: 10px 16px;
@@ -129,8 +135,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   overflow-y: auto;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .filter-top {
@@ -141,34 +148,55 @@ main {
   font-family: "Sour Gummy", sans-serif;
   font-weight: 900;
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
   color: #fecc07;
   margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .sidebar label {
   font-family: "Nunito Sans", sans-serif;
-  display: block;
-  margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  padding-top: 8px;
+  color: #ffffff;
 }
 
 .sidebar select {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Courier Prime", monospace;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   width: 100%;
+  min-height: 90px;
+  padding: 10px;
   margin-top: 6px;
   padding: 10px;
   background-color: #fecc0722;
   color: white;
-  border: none;
-  border-radius: 6px;
+  border: 1px solid #fecc07;
+  border-radius: 8px;
+  outline: none;
+}
+
+.sidebar select:focus {
+  border-color: #fecc07;
+  box-shadow: 0 0 5px #fecc07aa;
+}
+
+.sidebar option {
+  padding: 8px;
+  background-color: none;
+  color: white;
 }
 
 .sidebar-logo {
   width: 200px;
   margin-top: 32px;
+  margin: 40px auto 0;
+  display: block;
+  opacity: 0.85;
 }
 
 /* === Post 列表 & 帖子卡片 === */
@@ -367,7 +395,7 @@ main {
 
 .create-panel label {
   font-family: "Nunito Sans", sans-serif;
-  font-size: 24px;
+  font-size: 22px;
   color: #fecc07;
   font-weight: 600;
   margin-bottom: 6px;
