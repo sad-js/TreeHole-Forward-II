@@ -56,6 +56,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
           feeling={post.feeling}
           comments={post.comments.length}
           reactions={post.reactions}
+          onClick={() => onOpenReply(post)}
           onClickComments={() => onOpenReply(post)}
         />
       ))}

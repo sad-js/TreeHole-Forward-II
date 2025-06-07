@@ -24,7 +24,14 @@ function App() {
   return (
     <div className={showCreatePanel ? "blurred" : ""}>
       <Header
-        onAddPost={() => setShowCreatePanel(true)}
+        onAddPost={() => {
+          if (selectedPost) {
+            setSelectedPost(null);
+            setTimeout(() => setShowCreatePanel(true), 100);
+          } else {
+            setShowCreatePanel(true);
+          }
+        }}
         sortMode={sortMode}
         onChangeSortMode={setSortMode}
         searchQuery={searchQuery}

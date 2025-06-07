@@ -1,6 +1,6 @@
 // PostFeed.tsx
 
-import React from "react";
+import React, { useState } from "react";
 
 export interface PostCardProps {
   username: string;
@@ -10,6 +10,7 @@ export interface PostCardProps {
   feeling: string;
   comments: number;
   reactions: { [emoji: string]: number };
+  onClick: () => void;
   onClickComments: () => void;
 }
 
@@ -21,10 +22,28 @@ const PostCard: React.FC<PostCardProps> = ({
   feeling,
   comments,
   reactions,
+  onClick,
   onClickComments,
 }) => {
+  const [emojiCounts, setEmojiCounts] = useState(reactions);
+  const [clicked, setClicked] = useState<{ [emoji: string]: boolean }>({});
+
+  const handleEmojiClick = (emoji: string) => {
+    const alreadyClicked = clicked[emoji];
+    const newCounts = {
+      ...emojiCounts,
+      [emoji]: emojiCounts[emoji] + (alreadyClicked ? -1 : 1),
+    };
+
+    setEmojiCounts(newCounts);
+    setClicked({
+      ...clicked,
+      [emoji]: !alreadyClicked,
+    });
+  };
+
   return (
-    <div className="post-card">
+    <div className="post-card" onClick={onClick}>
       <div className="post-header">
         <div className="avatar"></div>
         <div className="post-header-info">
@@ -39,15 +58,24 @@ const PostCard: React.FC<PostCardProps> = ({
       <span className="feeling">{feeling}</span>
       <div className="post-meta-footer">
         <div className="post-emojis">
-          {Object.entries(reactions).map(([emoji, count]) => (
-            <span key={emoji}>
+          {Object.entries(emojiCounts).map(([emoji, count]) => (
+            <span
+              key={emoji}
+              onClick={(e) => {
+                e.stopPropagation(); // 防止触发展开 Reply Panel
+                handleEmojiClick(emoji);
+              }}
+              style={{
+                cursor: "pointer",
+                color: clicked[emoji] ? "#fecc07" : "white",
+                fontWeight: clicked[emoji] ? "bold" : "normal",
+              }}
+            >
               {emoji} {count}
             </span>
           ))}
         </div>
-        <span className="comment-count" onClick={onClickComments}>
-          {comments} comments →
-        </span>
+        <span className="comment-count">{comments} comments →</span>
       </div>
     </div>
   );
