@@ -1,0 +1,26 @@
+name: Sync upstream changes
+
+on:
+  schedule:
+    - cron: '0 4 * * *' # 每天 UTC 时间04:00自动同步（中国时间中午12点）
+  workflow_dispatch:    # 支持手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure git
+        run: |
+          git config --global user.email "xhai2@uci.edu"
+          git config --global user.name "AiiiiDannn"
+
+      - name: Add upstream and fetch
+        run: |
+          git remote add upstream https://github.com/sad-js/TreeHole-Forward-II.git
+          git fetch upstream
+          git checkout main
+          git merge upstream/main --allow-unrelated-histories -m "🔄 Sync from upstream"
+          git push origin main
