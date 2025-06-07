@@ -1,40 +1,56 @@
-// src/components/PostFeed.tsx
+// PostFeed.tsx
 
 import React from "react";
-import PostCard from "./PostCard";
-import { dummyPosts } from "../data/posts";
-import type { Post } from "../data/posts";
 
-export type SortMode = "new" | "hot";
-
-interface PostFeedProps {
-  sortMode: SortMode;
-  onOpenReply: (post: Post) => void;
+export interface PostCardProps {
+  username: string;
+  time: string;
+  category: string;
+  content: string;
+  feeling: string;
+  comments: number;
+  reactions: { [emoji: string]: number };
+  onClickComments: () => void;
 }
 
-const PostFeed: React.FC<PostFeedProps> = ({ sortMode, onOpenReply }) => {
-  const sorted = [...dummyPosts].sort((a, b) => {
-    if (sortMode === "hot") return b.comments.length - a.comments.length;
-    return new Date(b.time).getTime() - new Date(a.time).getTime();
-  });
-
+const PostCard: React.FC<PostCardProps> = ({
+  username,
+  time,
+  category,
+  content,
+  feeling,
+  comments,
+  reactions,
+  onClickComments,
+}) => {
   return (
-    <section className="post-feed">
-      {sorted.map((post, idx) => (
-        <PostCard
-          key={idx}
-          username={post.username}
-          time={post.time}
-          category={post.category}
-          content={post.content}
-          feeling={post.feeling}
-          comments={post.comments.length}
-          reactions={post.reactions}
-          onClickComments={() => onOpenReply(post)}
-        />
-      ))}
-    </section>
+    <div className="post-card">
+      <div className="post-header">
+        <div className="avatar"></div>
+        <div className="post-header-info">
+          <div className="post-top-row">
+            <span className="username">{username}</span>
+            <span className="post-time">{time}</span>
+          </div>
+          <div className="category">{category}</div>
+        </div>
+      </div>
+      <p className="post-content">{content}</p>
+      <span className="feeling">{feeling}</span>
+      <div className="post-meta-footer">
+        <div className="post-emojis">
+          {Object.entries(reactions).map(([emoji, count]) => (
+            <span key={emoji}>
+              {emoji} {count}
+            </span>
+          ))}
+        </div>
+        <span className="comment-count" onClick={onClickComments}>
+          {comments} comments →
+        </span>
+      </div>
+    </div>
   );
 };
 
-export default PostFeed;
+export default PostCard;
