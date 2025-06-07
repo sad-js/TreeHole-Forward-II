@@ -23,7 +23,7 @@ Make sure you have Node.js (recommended v18+) and npm installed:
 npm -v
 ```
 
-If it's not installed, please input below in your VS Code command line:
+To initialize, please input below in your VS Code command line:
 
 ```bash
 npm install

@@ -8,7 +8,7 @@ import PostFeed from "./components/PostFeed";
 import CreatePostPanel from "./components/CreatePostPanel";
 import type { SortMode } from "./components/PostFeed";
 import ReplyPanel from "./components/ReplyPanel";
-import { dummyPosts } from "./data/posts";
+// import { dummyPosts } from "./data/posts";
 import type { Post } from "./data/posts";
 
 function App() {
