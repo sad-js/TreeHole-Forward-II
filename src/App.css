@@ -197,6 +197,7 @@ main {
 .sidebar option:hover {
   background-color: #fecd07;
   color: black;
+  cursor: pointer;
 }
 
 .sidebar-logo {
@@ -266,12 +267,14 @@ main {
   font-size: 18px;
   font-weight: 700;
   color: #ffffff;
+  cursor: text;
 }
 
 .post-time {
   font-size: 14px;
   color: #c6beb5;
   font-family: "Courier New", Courier, monospace;
+  cursor: text;
 }
 
 .category {
@@ -280,6 +283,7 @@ main {
   color: #70a095;
   font-weight: bold;
   margin-top: 4px;
+  cursor: text;
 }
 
 .post-content {
@@ -287,6 +291,7 @@ main {
   font-size: 17px;
   color: #e0e0e0;
   margin-bottom: 6px;
+  cursor: text;
 }
 
 .feeling {
@@ -299,14 +304,22 @@ main {
   display: inline-block;
   margin-top: 8px;
   margin-bottom: 16px;
+  cursor: text;
 }
 
 .post-meta-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 15px;
-  margin-top: 16px;
+  /* font-size: 8px; */
+  /* margin-top: 16px; */
+}
+
+.post-meta-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
 }
 
 .post-emojis {
@@ -314,12 +327,19 @@ main {
   display: flex;
   gap: 20px;
   align-items: center;
+  font-size: 16px;
 }
 
 .post-emojis span {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.post-emojis span:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  filter: brightness(1.05);
 }
 
 .comment-count {
@@ -348,7 +368,7 @@ main {
   z-index: 2000;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .create-panel.slide-in {
@@ -439,6 +459,8 @@ textarea::placeholder {
   color: #888;
   font-size: 12px;
   margin: 4px 0 12px;
+  font-family: "Courier Prime", Courier, monospace;
+  font-weight: 700;
 }
 
 .create-panel select {
@@ -467,6 +489,15 @@ textarea::placeholder {
   color: #1a2b3c;
   font-weight: bold;
   cursor: pointer;
+  align-self: center;
+  max-width: fit-content;
+  padding-left: 25px;
+  padding-right: 20px;
+}
+
+.fly-button:hover {
+  transform: scale(1.02);
+  filter: brightness(1.05);
 }
 
 /* Overlay 修正 */
@@ -563,6 +594,7 @@ textarea::placeholder {
   font-size: 15px;
   color: #e0e0e0;
   margin-bottom: 6px;
+  cursor: text;
 }
 
 .reply-feeling {
@@ -609,14 +641,14 @@ textarea::placeholder {
 
 .reply-send-inside {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   right: 12px;
   background-color: #fecc07;
   color: #1a2b3c;
   border: none;
-  padding: 8px 16px;
+  padding: 4px 8px;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s ease;
@@ -662,4 +694,25 @@ textarea::placeholder {
   color: #bbb;
   margin-bottom: 4px;
   font-family: "Courier Prime", monospace;
+}
+
+body.panel-open {
+  overflow: hidden !important;
+}
+
+main.no-scroll,
+main.no-scroll .post-feed {
+  overflow: hidden !important;
+  max-height: 100vh;
+  height: 100vh;
+  /* 防止 touch 滑动 */
+  touch-action: none;
+}
+
+body.panel-open {
+  overflow: hidden !important;
+}
+
+main.no-scroll .post-feed {
+  overflow: hidden !important;
 }

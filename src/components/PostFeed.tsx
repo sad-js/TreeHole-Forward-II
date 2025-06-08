@@ -1,12 +1,13 @@
 // PostFeed.tsx
+
 import React from "react";
 import PostCard from "./PostCard";
-import { dummyPosts } from "../data/posts";
 import type { Post } from "../data/posts";
 
 export type SortMode = "new" | "hot";
 
 interface PostFeedProps {
+  posts: Post[]; // ✅ 改为从 props 传入所有帖子
   sortMode: SortMode;
   onOpenReply: (post: Post) => void;
   searchQuery: string;
@@ -15,6 +16,7 @@ interface PostFeedProps {
 }
 
 const PostFeed: React.FC<PostFeedProps> = ({
+  posts,
   sortMode,
   onOpenReply,
   searchQuery,
@@ -28,7 +30,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
   const matchesFeeling = (post: Post) =>
     selectedFeelings.includes("All") || selectedFeelings.includes(post.feeling);
 
-  const filtered = dummyPosts.filter(
+  const filtered = posts.filter(
     (post) =>
       post.content.toLowerCase().includes(searchQuery.toLowerCase()) &&
       matchesCategory(post) &&
@@ -37,9 +39,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
 
   const sorted = [...filtered].sort((a, b) => {
     if (sortMode === "hot") {
-      const aReacts = Object.values(a.reactions).reduce((sum, n) => sum + n, 0);
-      const bReacts = Object.values(b.reactions).reduce((sum, n) => sum + n, 0);
-      return bReacts - aReacts;
+      return b.comments.length - a.comments.length; // 🔥 按评论数量排序
     }
     return new Date(b.time).getTime() - new Date(a.time).getTime();
   });
@@ -55,9 +55,11 @@ const PostFeed: React.FC<PostFeedProps> = ({
           content={post.content}
           feeling={post.feeling}
           comments={post.comments.length}
-          reactions={post.reactions}
+          // reactions={post.reactions}
           onClick={() => onOpenReply(post)}
-          onClickComments={() => onOpenReply(post)}
+          // onClickEmoji={(emoji) => {
+          //   post.reactions[emoji] += 1;
+          // }}
         />
       ))}
     </section>

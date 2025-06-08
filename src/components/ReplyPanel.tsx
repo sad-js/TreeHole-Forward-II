@@ -54,19 +54,19 @@ const ReplyPanel: React.FC<ReplyPanelProps> = ({ show, post, onClose }) => {
         <p className="reply-post-content">{post.content}</p>
         <span className="reply-feeling">{post.feeling}</span>
 
-        <div className="reply-reactions">
+        {/* <div className="reply-reactions">
           {Object.entries(post.reactions).map(([emoji, count]) => (
             <span key={emoji}>
               {emoji} {count}
             </span>
           ))}
-        </div>
+        </div> */}
 
         <div className="reply-textarea-wrapper">
           <textarea
             className="reply-textarea"
             placeholder="Write your reply..."
-            rows={3}
+            rows={5}
             value={reply}
             onFocus={() => setIsReplyFocused(true)}
             onBlur={() => setIsReplyFocused(reply.trim() !== "")}
