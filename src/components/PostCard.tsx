@@ -11,7 +11,7 @@ export interface PostCardProps {
   comments: number;
   // reactions: { [emoji: string]: number };
   onClick: () => void;
-  // onClickEmoji: (emoji: string) => void; // ✅ 新增：点击 emoji 的处理函数
+  // onClickEmoji: (emoji: string) => void; // 新增：点击 emoji 的处理函数
 }
 
 const PostCard: React.FC<PostCardProps> = ({

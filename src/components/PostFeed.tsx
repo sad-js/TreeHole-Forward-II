@@ -39,7 +39,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
 
   const sorted = [...filtered].sort((a, b) => {
     if (sortMode === "hot") {
-      return b.comments.length - a.comments.length; // 🔥 按评论数量排序
+      return b.comments.length - a.comments.length; // 按评论数量排序
     }
     return new Date(b.time).getTime() - new Date(a.time).getTime();
   });

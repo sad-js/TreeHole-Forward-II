@@ -10,8 +10,10 @@ import type { SortMode } from "./components/PostFeed";
 import ReplyPanel from "./components/ReplyPanel";
 import { dummyPosts } from "./data/posts";
 import type { Post } from "./data/posts";
+import LandingPage from "./components/LandingPage";
 
 function App() {
+  const [signedIn, setSignedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCreatePanel, setShowCreatePanel] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("new");
@@ -21,16 +23,16 @@ function App() {
   ]);
   const [selectedFeelings, setSelectedFeelings] = useState<string[]>(["All"]);
 
-  // ✅ 本地状态：包括原始帖子 + 用户新增的帖子
+  // 本地状态：包括原始帖子 + 用户新增的帖子
   const [userPosts, setUserPosts] = useState<Post[]>([]);
 
-  // ✅ 新建帖子时调用：添加到 userPosts，关闭创建面板
+  // 新建帖子时调用：添加到 userPosts，关闭创建面板
   const handlePostCreate = (newPost: Post) => {
     setUserPosts((prev) => [newPost, ...prev]);
     setShowCreatePanel(false);
   };
 
-  // // ✅ 控制 body 滚动行为
+  // // 控制 body 滚动行为
   // useEffect(() => {
   //   const isPanelOpen = showCreatePanel || selectedPost !== null;
   //   document.body.style.overflow = isPanelOpen ? "hidden" : "auto";
@@ -46,6 +48,10 @@ function App() {
       document.body.style.overflow = "";
     }
   }, [showCreatePanel, selectedPost]);
+
+  if (!signedIn) {
+    return <LandingPage onSignIn={() => setSignedIn(true)} />;
+  }
 
   return (
     <div className={showCreatePanel ? "blurred" : ""}>
@@ -64,7 +70,7 @@ function App() {
         onSearchChange={setSearchQuery}
       />
       <Sidebar
-        posts={[...userPosts, ...dummyPosts]} // ✅ 合并传递给 Sidebar
+        posts={[...userPosts, ...dummyPosts]} // 合并传递给 Sidebar
         selectedCategories={selectedCategories}
         selectedFeelings={selectedFeelings}
         onCategoryChange={setSelectedCategories}
@@ -72,7 +78,7 @@ function App() {
       />
       <main className={showCreatePanel || selectedPost ? "no-scroll" : ""}>
         <PostFeed
-          posts={[...userPosts, ...dummyPosts]} // ✅ 合并传递给 PostFeed
+          posts={[...userPosts, ...dummyPosts]} // 合并传递给 PostFeed
           sortMode={sortMode}
           onOpenReply={(post) => setSelectedPost(post)}
           searchQuery={searchQuery}

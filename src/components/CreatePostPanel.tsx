@@ -1,12 +1,12 @@
 // CreatePostPanel.tsx
 
 import React, { useState } from "react";
-import type { Post } from "../data/posts"; // ✅ 引入 Post 类型
+import type { Post } from "../data/posts"; // 引入 Post 类型
 
 interface Props {
   show: boolean;
   onClose: () => void;
-  onPostCreate: (post: Post) => void; // ✅ 新增：父组件回调，处理新帖子
+  onPostCreate: (post: Post) => void; // 新增：父组件回调，处理新帖子
 }
 
 const names = [
@@ -15,6 +15,19 @@ const names = [
   "HiddenKoala",
   "ShySloth",
   "MidtermGhost",
+  "SecretSquirrel",
+  "CloakedCat",
+  "VeiledViper",
+  "IncognitoIguana",
+  "MaskedMongoose",
+  "PhantomPenguin",
+  "EnigmaticElephant",
+  "ObscureOtter",
+  "UnknownUnicorn",
+  "CloakedChameleon",
+  "HiddenHedgehog",
+  "ShroudedShark",
+  "VeiledVulture",
 ];
 
 const CreatePostPanel: React.FC<Props> = ({ show, onClose, onPostCreate }) => {
@@ -30,7 +43,7 @@ const CreatePostPanel: React.FC<Props> = ({ show, onClose, onPostCreate }) => {
 
   const charLimit = 500;
 
-  // ✅ 新增：处理 FLY 点击后创建帖子
+  // 新增：处理 FLY 点击后创建帖子
   const handleSubmit = () => {
     if (!content.trim()) return;
 
@@ -44,8 +57,8 @@ const CreatePostPanel: React.FC<Props> = ({ show, onClose, onPostCreate }) => {
       comments: [],
     };
 
-    onPostCreate(newPost); // ✅ 通知父组件插入新帖子
-    setContent(""); // ✅ 清空输入框（可选）
+    onPostCreate(newPost); // 通知父组件插入新帖子
+    setContent(""); // 清空输入框（可选）
   };
 
   return (
@@ -88,9 +101,13 @@ const CreatePostPanel: React.FC<Props> = ({ show, onClose, onPostCreate }) => {
           <option>😢 sad</option>
           <option>😊 happy</option>
           <option>😤 frustrated</option>
+          <option>😎 cool</option>
+          <option>🤔 thoughtful</option>
+          <option>😱 shocked</option>
+          <option>😇 angelic</option>
         </select>
 
-        {/* ✅ 新增：FLY 按钮触发 handleSubmit */}
+        {/* 新增：FLY 按钮触发 handleSubmit */}
         <button className="fly-button" onClick={handleSubmit}>
           FLY!
         </button>

@@ -50,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           value={selectedCategories}
           onChange={(e) => handleSelectChange(e, true)}
         >
-          <option>All</option>
+          <option className="option-all">All</option>
           {uniqueCategories.map((cat) => (
             <option key={cat}>{cat}</option>
           ))}
@@ -62,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           value={selectedFeelings}
           onChange={(e) => handleSelectChange(e, false)}
         >
-          <option>All</option>
+          <option className="option-all">All</option>
           {uniqueFeelings.map((feel) => (
             <option key={feel}>{feel}</option>
           ))}

@@ -32,6 +32,81 @@ main {
   box-sizing: border-box;
 }
 
+/* === Landing Page === */
+.landing-page {
+  min-height: 100vh;
+  width: 100vw;
+  background: #24384f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-content {
+  border-radius: 28px;
+  padding: 60px 70px 48px 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-logo {
+  width: 250px;
+}
+
+.landing-title {
+  font-family: "Audiowide", sans-serif;
+  color: #fecc07;
+  font-size: 42px;
+  margin: 36px;
+}
+
+.landing-welcome {
+  font-size: 22px;
+  color: #fff;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  font-family: "Sour Gummy", sans-serif;
+}
+
+.landing-desc {
+  font-size: 16px;
+  color: #bdbdbd;
+  margin-bottom: 28px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.landing-signin {
+  font-size: 20px;
+  font-family: inherit;
+  padding: 14px 38px;
+  background: #fecc07;
+  color: #1a2b3c;
+  border-radius: 16px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.16s, transform 0.12s;
+  box-shadow: 0 2px 8px rgba(254, 204, 7, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.external-link-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 0px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.landing-signin:hover {
+  transform: scale(1.01);
+}
+
 /* === Header 顶部固定 === */
 .header {
   position: fixed;
@@ -194,10 +269,26 @@ main {
   color: white;
 }
 
+.sidebar option:checked {
+  font-weight: bold;
+  /* color: #fecc07; */
+}
+
 .sidebar option:hover {
   background-color: #fecd07;
   color: black;
   cursor: pointer;
+}
+
+/* 让All选项比其他option更靠左一点 */
+.sidebar select .option-all {
+  padding-left: 10px !important;
+  font-weight: 700;
+  /* 你还可以改变颜色让它更突出，比如 */
+  color: #fecc07;
+}
+.sidebar select option:not(.option-all) {
+  padding-left: 26px; /* 其它项整体右缩进 */
 }
 
 .sidebar-logo {
@@ -630,7 +721,7 @@ textarea::placeholder {
   width: 100%;
   background-color: #fecc0722;
   border: 1px solid #aaa;
-  border-radius: 20px;
+  border-radius: 12px;
   color: white;
   padding: 14px 90px 14px 14px;
   font-size: 14px;
@@ -642,7 +733,7 @@ textarea::placeholder {
 .reply-send-inside {
   position: absolute;
   bottom: 15px;
-  right: 12px;
+  right: 7px;
   background-color: #fecc07;
   color: #1a2b3c;
   border: none;

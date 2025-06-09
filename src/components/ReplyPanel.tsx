@@ -85,7 +85,9 @@ const ReplyPanel: React.FC<ReplyPanelProps> = ({ show, post, onClose }) => {
             <div key={idx} className="reply-comment-box">
               <div className="reply-comment-header">
                 <strong>{comment.username}</strong>
-                <span className="reply-comment-time">{comment.time}</span>
+                <span className="reply-comment-time">
+                  {new Date(comment.time).toLocaleString()}
+                </span>
               </div>
               <p>{comment.content}</p>
             </div>
