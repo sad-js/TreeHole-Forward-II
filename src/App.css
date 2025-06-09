@@ -4,6 +4,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
 /* === 基础布局与字体 === */
 html,
@@ -15,7 +17,7 @@ body {
 
 body {
   margin: 0;
-  background-color: #13386c;
+  background-color: #1b3d6d;
   color: #ffffff;
   font-family: "Nunito Sans", sans-serif;
 }
@@ -28,6 +30,82 @@ main {
   min-height: calc(100vh - 80px);
   background-color: transparent;
   box-sizing: border-box;
+}
+
+/* === Landing Page === */
+.landing-page {
+  min-height: 100vh;
+  width: 100vw;
+  /* background: #24384f; */
+  background: #1b3d6d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-content {
+  border-radius: 28px;
+  padding: 60px 70px 48px 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-logo {
+  width: 250px;
+}
+
+.landing-title {
+  font-family: "Audiowide", sans-serif;
+  color: #fecc07;
+  font-size: 42px;
+  margin: 36px;
+}
+
+.landing-welcome {
+  font-size: 22px;
+  color: #fff;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  font-family: "Sour Gummy", sans-serif;
+}
+
+.landing-desc {
+  font-size: 16px;
+  color: #bdbdbd;
+  margin-bottom: 28px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.landing-signin {
+  font-size: 20px;
+  font-family: inherit;
+  padding: 14px 38px;
+  background: #fecc07;
+  color: #1a2b3c;
+  border-radius: 16px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.16s, transform 0.12s;
+  box-shadow: 0 2px 8px rgba(254, 204, 7, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.external-link-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 0px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.landing-signin:hover {
+  transform: scale(1.01);
 }
 
 /* === Header 顶部固定 === */
@@ -52,7 +130,7 @@ main {
 }
 
 .logo-title h1 {
-  font-family: "Sour Gummy", sans-serif;
+  font-family: "Audiowide", sans-serif;
   font-size: 38px;
   color: #fecc07;
   margin: 0;
@@ -82,6 +160,11 @@ main {
 .tab:hover {
   background-color: #fecc07;
   color: #1a2b3c;
+}
+
+.tab:hover {
+  transform: scale(1.1);
+  filter: brightness(1.05);
 }
 
 .search {
@@ -129,8 +212,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   overflow-y: auto;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .filter-top {
@@ -141,34 +225,79 @@ main {
   font-family: "Sour Gummy", sans-serif;
   font-weight: 900;
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
   color: #fecc07;
   margin-top: 0;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
 }
 
 .sidebar label {
   font-family: "Nunito Sans", sans-serif;
-  display: block;
-  margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  padding-top: 8px;
+  color: #ffffff;
 }
 
 .sidebar select {
-  font-family: "Courier New", Courier, monospace;
   font-size: 14px;
-  font-weight: 600;
   width: 100%;
+  min-height: 90px;
+  padding: 10px;
   margin-top: 6px;
   padding: 10px;
-  background-color: #fecc0722;
+  /* 加入毛玻璃效果 */
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  border: none;
-  border-radius: 6px;
+  border: 1px solid #fecc07;
+  border-radius: 8px;
+  outline: none;
+  font-family: "Courier Prime", monospace;
+  font-weight: 700;
+}
+
+.sidebar select:focus {
+  border-color: #fecc07;
+  box-shadow: 0 0 5px #fecc07;
+}
+
+.sidebar option {
+  padding: 8px;
+  background-color: none;
+  color: white;
+}
+
+.sidebar option:checked {
+  font-weight: bold;
+  /* color: #fecc07; */
+}
+
+.sidebar option:hover {
+  background-color: #fecd07;
+  color: black;
+  cursor: pointer;
+}
+
+/* 让All选项比其他option更靠左一点 */
+.sidebar select .option-all {
+  padding-left: 10px !important;
+  font-weight: 700;
+  /* 你还可以改变颜色让它更突出，比如 */
+  color: #fecc07;
+}
+.sidebar select option:not(.option-all) {
+  padding-left: 26px; /* 其它项整体右缩进 */
 }
 
 .sidebar-logo {
-  width: 200px;
+  width: 180px;
   margin-top: 32px;
+  margin: 40px auto 0;
+  display: block;
+  opacity: 0.85;
 }
 
 /* === Post 列表 & 帖子卡片 === */
@@ -184,8 +313,8 @@ main {
 }
 
 .post-card {
-  width: 92%;
-  /* align-items: center; */
+  width: 95%;
+  align-items: center;
   max-width: 100%;
   margin-left: none;
   border-radius: 12px;
@@ -193,6 +322,7 @@ main {
   background-color: #1f2e3c;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .post-card:hover {
@@ -229,20 +359,23 @@ main {
   font-size: 18px;
   font-weight: 700;
   color: #ffffff;
+  cursor: text;
 }
 
 .post-time {
   font-size: 14px;
   color: #c6beb5;
   font-family: "Courier New", Courier, monospace;
+  cursor: text;
 }
 
 .category {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Courier Prime", monospace;
   font-size: 14px;
   color: #70a095;
   font-weight: bold;
   margin-top: 4px;
+  cursor: text;
 }
 
 .post-content {
@@ -250,6 +383,7 @@ main {
   font-size: 17px;
   color: #e0e0e0;
   margin-bottom: 6px;
+  cursor: text;
 }
 
 .feeling {
@@ -262,14 +396,22 @@ main {
   display: inline-block;
   margin-top: 8px;
   margin-bottom: 16px;
+  cursor: text;
 }
 
 .post-meta-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 15px;
-  margin-top: 16px;
+  /* font-size: 8px; */
+  /* margin-top: 16px; */
+}
+
+.post-meta-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
 }
 
 .post-emojis {
@@ -277,12 +419,19 @@ main {
   display: flex;
   gap: 20px;
   align-items: center;
+  font-size: 16px;
 }
 
 .post-emojis span {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.post-emojis span:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  filter: brightness(1.05);
 }
 
 .comment-count {
@@ -311,7 +460,7 @@ main {
   z-index: 2000;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .create-panel.slide-in {
@@ -367,7 +516,7 @@ main {
 
 .create-panel label {
   font-family: "Nunito Sans", sans-serif;
-  font-size: 24px;
+  font-size: 22px;
   color: #fecc07;
   font-weight: 600;
   margin-bottom: 6px;
@@ -402,6 +551,8 @@ textarea::placeholder {
   color: #888;
   font-size: 12px;
   margin: 4px 0 12px;
+  font-family: "Courier Prime", Courier, monospace;
+  font-weight: 700;
 }
 
 .create-panel select {
@@ -413,7 +564,8 @@ textarea::placeholder {
   border: none;
   background-color: #fecc0722;
   color: white;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Courier Prime", Courier, monospace;
+  font-weight: 400;
 }
 
 .fly-button {
@@ -429,6 +581,15 @@ textarea::placeholder {
   color: #1a2b3c;
   font-weight: bold;
   cursor: pointer;
+  align-self: center;
+  max-width: fit-content;
+  padding-left: 25px;
+  padding-right: 20px;
+}
+
+.fly-button:hover {
+  transform: scale(1.02);
+  filter: brightness(1.05);
 }
 
 /* Overlay 修正 */
@@ -450,10 +611,200 @@ textarea::placeholder {
   pointer-events: all;
 }
 
-.reply-box {
+/* === Reply Panel === */
+.reply-panel {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 360px;
+  height: calc(100vh - 80px);
+  background-color: #24384f;
+  padding: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+}
+
+.reply-panel.slide-in {
+  transform: translateX(0);
+}
+
+.reply-post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.reply-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #c6beb5;
+}
+
+.reply-user-meta {
+  flex: 1;
+}
+
+.reply-top-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reply-username {
+  font-family: "Sour Gummy", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fecc07;
+}
+
+.reply-time {
+  font-size: 12px;
+  color: #aaa;
+  font-family: "Courier Prime", Courier, monospace;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.reply-category {
+  background-color: #fecc0722;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #70a095;
+  margin-top: 2px;
+  font-family: "Courier Prime", monospace;
+  font-weight: 700;
+}
+
+.reply-post-content {
+  font-size: 15px;
+  color: #e0e0e0;
+  margin-bottom: 6px;
+  cursor: text;
+}
+
+.reply-feeling {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: fit-content;
+  background-color: #70a095;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.reply-reactions {
+  font-size: 16px;
+  display: flex;
+  gap: 14px;
+  margin: 16px 0 12px;
+  color: #ffd26f;
+}
+
+.reply-textarea-wrapper {
+  position: relative;
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+
+.reply-textarea {
+  width: 100%;
+  background-color: #fecc0722;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  color: white;
+  padding: 14px 90px 14px 14px;
+  font-size: 14px;
+  resize: none;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.reply-send-inside {
+  position: absolute;
+  bottom: 15px;
+  right: 7px;
+  background-color: #fecc07;
+  color: #1a2b3c;
+  border: none;
+  padding: 4px 8px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.reply-send-inside:hover {
+  background-color: #ffd94f;
+}
+
+.reply-comments-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fecc07;
+  margin-bottom: 10px;
+}
+
+.reply-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reply-comment-header {
+  font-family: "Sour Gummy", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #ddd;
+  margin-bottom: 4px;
+}
+
+.reply-comment-box {
   background-color: #324a64;
   border-radius: 8px;
-  padding: 10px 16px;
-  margin-bottom: 10px;
+  padding: 10px 14px;
   color: white;
+  font-size: 14px;
+}
+
+.reply-comment-time {
+  font-size: 11px;
+  color: #bbb;
+  margin-bottom: 4px;
+  font-family: "Courier Prime", monospace;
+}
+
+body.panel-open {
+  overflow: hidden !important;
+}
+
+main.no-scroll,
+main.no-scroll .post-feed {
+  overflow: hidden !important;
+  max-height: 100vh;
+  height: 100vh;
+  /* 防止 touch 滑动 */
+  touch-action: none;
+}
+
+body.panel-open {
+  overflow: hidden !important;
+}
+
+main.no-scroll .post-feed {
+  overflow: hidden !important;
 }

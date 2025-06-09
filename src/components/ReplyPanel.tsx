@@ -11,11 +11,13 @@ interface ReplyPanelProps {
 
 const ReplyPanel: React.FC<ReplyPanelProps> = ({ show, post, onClose }) => {
   const [reply, setReply] = useState("");
-  //   const [replies, setReplies] = useState<Comment[]>(post?.comments ?? []);
   const [replies, setReplies] = useState<Comment[]>([]);
+  const [isReplyFocused, setIsReplyFocused] = useState(false);
 
   useEffect(() => {
-    setReplies(post?.comments ?? []); // ⬅️ 这里同步 replies
+    if (post) {
+      setReplies(post.comments);
+    }
   }, [post]);
 
   if (!post) return null;
@@ -35,48 +37,57 @@ const ReplyPanel: React.FC<ReplyPanelProps> = ({ show, post, onClose }) => {
   return (
     <>
       <div className={`overlay ${show ? "active" : ""}`} onClick={onClose} />
-      <div className={`create-panel ${show ? "slide-in" : ""}`}>
-        <div className="post-header">
-          <div className="avatar-circle"></div>
-          <div className="post-header-info">
-            <div className="post-top-row">
-              <span className="username">{post.username}</span>
-              <span className="post-time">
+      <div className={`reply-panel ${show ? "slide-in" : ""}`}>
+        <div className="reply-post-header">
+          <div className="reply-avatar" />
+          <div className="reply-user-meta">
+            <div className="reply-top-row">
+              <span className="reply-username">{post.username}</span>
+              <span className="reply-time">
                 {new Date(post.time).toLocaleString()}
               </span>
             </div>
-            <div className="category">{post.category}</div>
-          </div>
-        </div>
-        <p className="post-content">{post.content}</p>
-        <span className="feeling">{post.feeling}</span>
-
-        <div className="post-meta-footer">
-          <div className="post-emojis">
-            {Object.entries(post.reactions).map(([emoji, count]) => (
-              <span key={emoji}>
-                {emoji} {count}
-              </span>
-            ))}
+            <span className="reply-category">{post.category}</span>
           </div>
         </div>
 
-        <textarea
-          placeholder="Write your reply..."
-          rows={3}
-          value={reply}
-          onChange={(e) => setReply(e.target.value)}
-        />
-        <button className="fly-button" onClick={handleSend}>
-          Send
-        </button>
+        <p className="reply-post-content">{post.content}</p>
+        <span className="reply-feeling">{post.feeling}</span>
 
-        <div style={{ marginTop: 20 }}>
+        {/* <div className="reply-reactions">
+          {Object.entries(post.reactions).map(([emoji, count]) => (
+            <span key={emoji}>
+              {emoji} {count}
+            </span>
+          ))}
+        </div> */}
+
+        <div className="reply-textarea-wrapper">
+          <textarea
+            className="reply-textarea"
+            placeholder="Write your reply..."
+            rows={5}
+            value={reply}
+            onFocus={() => setIsReplyFocused(true)}
+            onBlur={() => setIsReplyFocused(reply.trim() !== "")}
+            onChange={(e) => setReply(e.target.value)}
+          />
+          {isReplyFocused && (
+            <button className="reply-send-inside" onClick={handleSend}>
+              Send
+            </button>
+          )}
+        </div>
+
+        <h3 className="reply-comments-title">Replies</h3>
+        <div className="reply-comments">
           {replies.map((comment, idx) => (
-            <div key={idx} className="reply-box">
-              <strong>{comment.username}</strong>
-              <div style={{ fontSize: "12px", color: "#aaa" }}>
-                {comment.time}
+            <div key={idx} className="reply-comment-box">
+              <div className="reply-comment-header">
+                <strong>{comment.username}</strong>
+                <span className="reply-comment-time">
+                  {new Date(comment.time).toLocaleString()}
+                </span>
               </div>
               <p>{comment.content}</p>
             </div>

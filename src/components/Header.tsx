@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className="header">
       <div className="logo-title">
-        <h1>ꪊᥴ꠸ ꪻ᥅ꫀꫀꫝꪮꪶꫀ</h1>
+        <h1>UCI TreeHole</h1>
         {/* 
         GET FONT FROM https://tools.picsart.com/text/font-generator/
         𝖀𝕮𝕴 𝕿𝖗𝖊𝖊𝕳𝖔𝖑𝖊
