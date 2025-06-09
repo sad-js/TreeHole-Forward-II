@@ -36,7 +36,8 @@ main {
 .landing-page {
   min-height: 100vh;
   width: 100vw;
-  background: #24384f;
+  /* background: #24384f; */
+  background: #1b3d6d;
   display: flex;
   align-items: center;
   justify-content: center;
